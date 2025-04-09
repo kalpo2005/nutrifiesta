@@ -3,7 +3,6 @@ session_start();
 require('inc/db-config.php');
 require('inc/essentias.php');
 
-// ✅ Initialize error message
 $errorMsg = '';
 
 if (isset($_POST['login'])) {
@@ -11,13 +10,13 @@ if (isset($_POST['login'])) {
 
     $query = "SELECT * FROM admin_card WHERE admin_name = ? AND password = ?";
     $values = [$frm_data['admin_name'], $frm_data['admin_pass']];
-
     $res = select($query, $values, "ss");
 
     if ($res && mysqli_num_rows($res) == 1) {
         $_SESSION['adminLogin'] = true;
         $_SESSION['admin_name'] = $frm_data['admin_name'];
 
+        // ✅ Redirect to dashboard
         header("Location: inc/dashboard.php");
         exit;
     } else {

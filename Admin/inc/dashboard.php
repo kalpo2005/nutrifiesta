@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+// Check if admin is logged in
+if (!isset($_SESSION['adminLogin']) || $_SESSION['adminLogin'] !== true) {
+    header("Location: ../index.php"); // Redirect to login page
+    exit;
+}
+
+// Get the admin name from session
+$adminName = $_SESSION['admin_name'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -108,7 +122,8 @@
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle py-1 px-3 rounded-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user-circle me-1"></i><i class="fas fa-user-circle me-1"></i>
-                                kalp
+                                Welcome, <?php echo htmlspecialchars($adminName); ?> 👋
+
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#"><i class="fa-solid fa-address-card me-2"></i>Profile</a></li>
