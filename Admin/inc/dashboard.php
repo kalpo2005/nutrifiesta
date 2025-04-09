@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,13 +10,10 @@
 
 <body class="bg-light">
 
-<?php require('user_count.php'); ?>
-
-
-
     <div class="wrapper">
         <div id="overlay"></div>
-        <!-- sidebar start -->
+
+        <!-- Sidebar start -->
         <div class="sidebar shadow">
             <div class="admin_brand d-flex justify-content-between align-items-baseline">
                 <div>
@@ -42,7 +36,7 @@
                     </a>
                 </li>
 
-                <!-- drodown menu start -->
+                <!-- Dropdown menu -->
                 <li class="nav-item position-relative" data-bs-toggle="collapse" href="#masterCollapse" role="button" aria-expanded="false" aria-controls="masterCollapse">
                     <a class="nav-link" href="#">
                         <span class="icon" data-bs-toggle="tooltip" data-bs-title="Master">
@@ -51,6 +45,7 @@
                         <span class="menu">Master</span>
                     </a>
                 </li>
+
                 <div class="collapse" id="masterCollapse">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
@@ -60,7 +55,6 @@
                             <span class="menu">Child One</span>
                         </a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <span class="icon" data-bs-toggle="tooltip" data-bs-title="Child Two">
@@ -70,9 +64,6 @@
                         </a>
                     </li>
                 </div>
-                <!-- dropdown menu end -->
-
-
 
                 <li class="nav-item">
                     <a class="nav-link" href="#">
@@ -80,7 +71,6 @@
                         <span class="menu">Users</span>
                     </a>
                 </li>
-
 
                 <li class="nav-item">
                     <a class="nav-link" href="#">
@@ -91,16 +81,15 @@
 
             </ul>
         </div>
-        <!-- sidebar end -->
+        <!-- Sidebar end -->
+
         <div class="content">
-            <!-- top navbar start -->
+            <!-- Top navbar -->
             <nav class="navbar navbar-expand-md navbar-light bg-light shadow">
                 <div class="container-fluid px-3">
-
                     <button class="navbar-toggler border-0" type="button" id="show_sidebar_phone">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
 
                     <a class="navbar-brand d-none d-md-block" href="javascript:void(0)" id="show_sidebar_pc">
                         <i class="fas fa-bars fa-lg"></i>
@@ -108,9 +97,7 @@
 
                     <div class="fw-bold text-secondary d-md-none d-block">Admin Panel</div>
 
-
                     <div class="ms-auto d-flex align-items-center">
-
                         <div class="nav-item d-none d-md-block me-2" data-bs-toggle="tooltip" data-bs-title="Full Screen" data-bs-placement="left">
                             <a href="#" class="nav-link" id="fullscreen">
                                 <i class="fa-solid fa-expand"></i>
@@ -118,41 +105,31 @@
                         </div>
 
                         <div class="dropdown">
-
                             <a class="nav-link dropdown-toggle py-1 px-3 rounded-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user-circle me-1"></i>Kalpo
                             </a>
-
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#"><i class="fa-solid fa-address-card me-2"></i>Profile</a></li>
                                 <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear me-2"></i>Account</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
-                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
                             </ul>
                         </div>
-
-
                     </div>
-
-
                 </div>
             </nav>
-            <!-- top navbar end -->
-            <!-- main content start -->
+
+            <!-- Main content -->
             <main class="bg-secondary bg-opacity-25 min-vh-100">
-
                 <div class="container-fluid p-3 p-md-4">
-
                     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                         <div class="fs-4 text-secondary fw-bolder">Dashboard</div>
                         <div class="text-secondary lead fw-normal" id="curr_date_time"></div>
                     </div>
                     <hr>
-                    <div class="row g-4">
 
+                    <div class="row g-4">
+                        <!-- User Count -->
                         <div class="col-lg-3 col-md-6">
                             <a href="#" class="text-decoration-none">
                                 <div class="card bg-danger bg-gradient shadow-sm custom-card">
@@ -161,7 +138,8 @@
                                             <h1><i class="fas fa-users fa-2x text-white-50"></i></h1>
                                         </div>
                                         <div class="text-center">
-                                            <h2 class="display-4 fw-bold text-white"><?php echo $user_count; ?>
+                                            <h2 class="display-4 fw-bold text-white">
+                                                <?php require(__DIR__ . '/../../php/user_count.php'); ?>
                                             </h2>
                                             <h4 class="text-white-50">Users</h4>
                                         </div>
@@ -170,7 +148,7 @@
                             </a>
                         </div>
 
-
+                        <!-- Order Count -->
                         <div class="col-lg-3 col-md-6">
                             <a href="#" class="text-decoration-none">
                                 <div class="card bg-primary bg-gradient shadow-sm custom-card">
@@ -179,7 +157,9 @@
                                             <h1><i class="fas fa-cart-shopping fa-2x text-white-50"></i></h1>
                                         </div>
                                         <div class="text-center">
-                                            <h2 class="display-4 fw-bold text-white">1</h2>
+                                            <h2 class="display-4 fw-bold text-white">
+                                                5
+                                            </h2>
                                             <h4 class="text-white-50">Orders</h4>
                                         </div>
                                     </div>
@@ -187,10 +167,10 @@
                             </a>
                         </div>
 
-
+                        <!-- Static Data -->
                         <div class="col-lg-3 col-md-6">
                             <a href="#" class="text-decoration-none">
-                                <div class="card bg-primary bg-success shadow-sm custom-card">
+                                <div class="card bg-success shadow-sm custom-card">
                                     <div class="card-body p-3 pb-2 px-3 d-flex flex-row justify-content-between align-items-center">
                                         <div>
                                             <h1><i class="fas fa-list fa-2x text-white-50"></i></h1>
@@ -203,7 +183,6 @@
                                 </div>
                             </a>
                         </div>
-
 
                         <div class="col-lg-3 col-md-6">
                             <a href="#" class="text-decoration-none">
@@ -221,7 +200,7 @@
                             </a>
                         </div>
 
-
+                        <!-- Chart Section -->
                         <div class="col-lg-12">
                             <div class="card shadow">
                                 <div class="card-header">
@@ -251,21 +230,17 @@
                     </div>
                 </div>
             </main>
-            <!-- main content end -->
 
-            <!-- footer start -->
+            <!-- Footer -->
             <footer class="bg-light shadow text-secondary text-center d-flex flex-column flex-md-row justify-content-between p-3 p-md-4">
                 <div>Copyright &copy; 2025 Vanita Solanki</div>
-                <div>Made with support </div>
+                <div>Made with support</div>
             </footer>
-            <!-- footer end -->
-
         </div>
     </div>
 
     <?php require('layout/deshboardlink.php'); ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

@@ -4,7 +4,7 @@
     const form = e.target;
     const formData = new FormData(form);
 
-    fetch('../Admin/inc/php/register.php', {
+    fetch('php/register.php', {
         method: 'POST',
     body: formData
     })

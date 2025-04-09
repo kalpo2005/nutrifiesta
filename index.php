@@ -74,7 +74,7 @@
   <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-      <form method="POST" action="../Admin/inc/php/login.php">
+      <form method="POST" action="php/login.php">
           <div class="modal-header">
             <h5 class="modal-title" id="loginModalLabel">
               <i class="bi bi-person-fill me-2"></i> User Login
