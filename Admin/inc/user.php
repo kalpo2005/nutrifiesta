@@ -11,6 +11,9 @@ if (!isset($_SESSION['adminLogin']) || $_SESSION['adminLogin'] !== true) {
 $adminName = $_SESSION['admin_name'];
 ?>
 
+<?php
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,72 +33,73 @@ $adminName = $_SESSION['admin_name'];
 
         <!-- Sidebar start -->
         <div class="sidebar shadow">
-            <div class="admin_brand d-flex justify-content-between align-items-baseline">
-                <div>
-                    <a class="nav-link fw-bold" href="#">
-                        <span class="icon"><i class="fas fa-code"></i></span>
-                        <span class="menu">Admin Dashboard</span>
-                    </a>
-                </div>
-                <div class="d-block d-md-none">
-                    <a href="javascript:void(0)" id="close_sidebar"><i class="fas fa-times-circle fa-lg"></i></a>
-                </div>
-            </div>
-
-            <ul class="nav nav-pills flex-column">
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">
-                        <span class="icon" data-bs-toggle="tooltip" data-bs-title="Dashboard"><i class="fas fa-dashboard"></i></span>
-                        <span class="menu">Dashboard</span>
-                    </a>
-                </li>
-
-                <!-- Dropdown menu -->
-                <li class="nav-item position-relative" data-bs-toggle="collapse" href="#masterCollapse" role="button" aria-expanded="false" aria-controls="masterCollapse">
-                    <a class="nav-link" href="#">
-                        <span class="icon" data-bs-toggle="tooltip" data-bs-title="Master">
-                            <i class="fas fa-cubes"></i>
-                        </span>
-                        <span class="menu">Master</span>
-                    </a>
-                </li>
-
-                <div class="collapse" id="masterCollapse">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span class="icon" data-bs-toggle="tooltip" data-bs-title="Child One">
-                                <i class="fas fa-cube"></i>
-                            </span>
-                            <span class="menu">Child One</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span class="icon" data-bs-toggle="tooltip" data-bs-title="Child Two">
-                                <i class="fas fa-cube"></i>
-                            </span>
-                            <span class="menu">Child Two</span>
-                        </a>
-                    </li>
-                </div>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="user.php">
-                        <span class="icon" data-bs-toggle="tooltip" data-bs-title="Users"><i class="fas fa-users"></i></span>
-                        <span class="menu">Users</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="logout.php">
-                        <span class="icon" data-bs-toggle="tooltip" data-bs-title="Logout"><i class="fas fa-sign-out"></i></span>
-                        <span class="menu">Logout</span>
-                    </a>
-                </li>
-
-            </ul>
+    <div class="admin_brand d-flex justify-content-between align-items-baseline">
+        <div>
+            <a class="nav-link fw-bold" href="#">
+                <span class="icon"><i class="fas fa-code"></i></span>
+                <span class="menu">Admin Dashboard</span>
+            </a>
         </div>
+        <div class="d-block d-md-none">
+            <a href="javascript:void(0)" id="close_sidebar"><i class="fas fa-times-circle fa-lg"></i></a>
+        </div>
+    </div>
+
+    <ul class="nav nav-pills flex-column">
+
+        <li class="nav-item <?php echo ($currentPage == 'dashboard.php') ? 'active' : ''; ?>">
+            <a class="nav-link" href="dashboard.php">
+                <span class="icon" data-bs-toggle="tooltip" data-bs-title="Dashboard"><i class="fas fa-dashboard"></i></span>
+                <span class="menu">Dashboard</span>
+            </a>
+        </li>
+
+        <!-- Dropdown menu -->
+        <li class="nav-item position-relative <?php echo ($currentPage == 'child-one.php' || $currentPage == 'child-two.php') ? 'active' : ''; ?>" data-bs-toggle="collapse" href="#masterCollapse" role="button" aria-expanded="false" aria-controls="masterCollapse">
+            <a class="nav-link" href="#">
+                <span class="icon" data-bs-toggle="tooltip" data-bs-title="Master">
+                    <i class="fas fa-cubes"></i>
+                </span>
+                <span class="menu">Master</span>
+            </a>
+        </li>
+
+        <div class="collapse <?php echo ($currentPage == 'child-one.php' || $currentPage == 'child-two.php') ? 'show' : ''; ?>" id="masterCollapse">
+            <li class="nav-item <?php echo ($currentPage == 'child-one.php') ? 'active' : ''; ?>">
+                <a class="nav-link" href="child-one.php">
+                    <span class="icon" data-bs-toggle="tooltip" data-bs-title="Child One">
+                        <i class="fas fa-cube"></i>
+                    </span>
+                    <span class="menu">Child One</span>
+                </a>
+            </li>
+            <li class="nav-item <?php echo ($currentPage == 'child-two.php') ? 'active' : ''; ?>">
+                <a class="nav-link" href="child-two.php">
+                    <span class="icon" data-bs-toggle="tooltip" data-bs-title="Child Two">
+                        <i class="fas fa-cube"></i>
+                    </span>
+                    <span class="menu">Child Two</span>
+                </a>
+            </li>
+        </div>
+
+        <li class="nav-item <?php echo ($currentPage == 'user.php') ? 'active' : ''; ?>">
+            <a class="nav-link" href="user.php">
+                <span class="icon" data-bs-toggle="tooltip" data-bs-title="Users"><i class="fas fa-users"></i></span>
+                <span class="menu">Users</span>
+            </a>
+        </li>
+
+        <li class="nav-item <?php echo ($currentPage == 'logout.php') ? 'active' : ''; ?>">
+            <a class="nav-link" href="logout.php">
+                <span class="icon" data-bs-toggle="tooltip" data-bs-title="Logout"><i class="fas fa-sign-out"></i></span>
+                <span class="menu">Logout</span>
+            </a>
+        </li>
+
+    </ul>
+</div>
+
         <!-- Sidebar end -->
 
         <div class="content">
@@ -139,7 +143,62 @@ $adminName = $_SESSION['admin_name'];
             </nav>
 
             <!-- Main content -->
-           
+            <?php require_once 'db-config.php'; ?>
+
+            <section class="bg-secondary bg-opacity-25 min-vh-100 p-4">
+                <div class="container-fluid">
+                    <div class="card shadow">
+                        <div class="card-header bg-dark text-white">
+                            <h4 class="mb-0">All Users</h4>
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table table-bordered table-striped table-hover align-middle">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>  
+                                        <th>user Id</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $sql = "SELECT * FROM users ORDER BY user_id DESC";
+
+                                    $res = mysqli_query($con, $sql);
+                                    if ($res && mysqli_num_rows($res) > 0) {
+                                        $i = 1;
+                                        while ($row = mysqli_fetch_assoc($res)) {
+                                            echo "<tr>
+                                                <td>{$i}</td>
+                                                <td>" . htmlspecialchars($row['name']) . "</td>
+                                                <td>" . htmlspecialchars($row['email']) . "</td>
+                                                <td>" . htmlspecialchars($row['contact']) . "</td>
+                                                <td>" . htmlspecialchars($row['user_id']) . "</td>
+                                                <td>
+                                                    <a href='../../php/delete-user.php?id=" . $row["user_id"] . "' 
+                                                       onclick=\"return confirm('Are you sure you want to delete this user?');\" 
+                                                       class='btn btn-sm btn-danger'>
+                                                        <i class='fas fa-trash'></i> Delete
+                                                    </a>
+                                                </td>
+                                            </tr>";
+                                            $i++;
+                                        }
+                                        
+                                    } else {
+                                        echo "<tr><td colspan='6' class='text-center'>No users found</td></tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
 
             <!-- Footer -->
             <footer class="bg-light shadow text-secondary text-center d-flex flex-column flex-md-row justify-content-between p-3 p-md-4">
@@ -152,8 +211,8 @@ $adminName = $_SESSION['admin_name'];
     <?php require('layout/deshboardlink.php'); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-      <!-- ✅ Bootstrap JS (must be placed at the bottom of body) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- ✅ Bootstrap JS (must be placed at the bottom of body) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </body>
 

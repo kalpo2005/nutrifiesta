@@ -2,10 +2,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
- <!-- ✅ Bootstrap CSS -->
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- ✅ Font Awesome (for icons) -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<!-- ✅ Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- ✅ Font Awesome (for icons) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <style>
     body {
@@ -16,6 +16,20 @@
     html {
         scroll-behavior: smooth;
     }
+
+    /* for the nav active  */
+
+    .nav-item.active>.nav-link {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    .nav-item.active .icon,
+    .nav-item.active .menu {
+        color: #fff !important;
+    }
+
+
 
     .bg-accent {
         background-color: #ff5722;
