@@ -81,7 +81,7 @@ $adminName = $_SESSION['admin_name'];
                 </div>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="user.php">
                         <span class="icon" data-bs-toggle="tooltip" data-bs-title="Users"><i class="fas fa-users"></i></span>
                         <span class="menu">Users</span>
                     </a>
