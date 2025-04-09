@@ -10,6 +10,7 @@
 
 <body class="bg-light">
 
+
     <div class="wrapper">
         <div id="overlay"></div>
 
@@ -106,12 +107,15 @@
 
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle py-1 px-3 rounded-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user-circle me-1"></i>Kalpo
+                                <i class="fas fa-user-circle me-1"></i><i class="fas fa-user-circle me-1"></i>
+                                kalp
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#"><i class="fa-solid fa-address-card me-2"></i>Profile</a></li>
                                 <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear me-2"></i>Account</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
                             </ul>
                         </div>
@@ -142,6 +146,33 @@
                                                 <?php require(__DIR__ . '/../../php/user_count.php'); ?>
                                             </h2>
                                             <h4 class="text-white-50">Users</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- visitor count  -->
+                        <div class="col-lg-3 col-md-6">
+                            <a href="#" class="text-decoration-none">
+                                <div class="card bg-dark bg-gradient shadow-sm custom-card">
+                                    <div class="card-body p-3 pb-2 px-3 d-flex flex-row justify-content-between align-items-center">
+                                        <div>
+                                            <h1><i class="fas fa-people-line fa-2x text-white-50"></i></h1>
+                                        </div>
+                                        <div class="text-center">
+                                            <h2 class="display-4 fw-bold text-white">
+                                                <?php
+                                                $counterFile = $_SERVER['DOCUMENT_ROOT'] . '/nutrifiesta/php/counter.txt';
+
+                                                if (file_exists($counterFile)) {
+                                                    echo  file_get_contents($counterFile);
+                                                }
+                                                ?>
+
+
+                                            </h2>
+                                            <h4 class="text-white-50">Visitors</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -184,21 +215,6 @@
                             </a>
                         </div>
 
-                        <div class="col-lg-3 col-md-6">
-                            <a href="#" class="text-decoration-none">
-                                <div class="card bg-dark bg-gradient shadow-sm custom-card">
-                                    <div class="card-body p-3 pb-2 px-3 d-flex flex-row justify-content-between align-items-center">
-                                        <div>
-                                            <h1><i class="fas fa-people-line fa-2x text-white-50"></i></h1>
-                                        </div>
-                                        <div class="text-center">
-                                            <h2 class="display-4 fw-bold text-white">8</h2>
-                                            <h4 class="text-white-50">Visitors</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
 
                         <!-- Chart Section -->
                         <div class="col-lg-12">
@@ -243,4 +259,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

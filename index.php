@@ -74,7 +74,7 @@
   <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-      <form method="POST" action="php/login.php">
+        <form method="POST" action="php/login.php">
           <div class="modal-header">
             <h5 class="modal-title" id="loginModalLabel">
               <i class="bi bi-person-fill me-2"></i> User Login
@@ -611,6 +611,13 @@
   </div>
   <h6 class="text-center bg-dark text-white p-3 m-0">Designed and Developed by NutriFiesta Grocery Web </h6>
 
+  <!-- this is a for only visite count  -->
+  <!-- <div class="text-center text-muted">
+    Visitor Count:
+    <strong>
+      <?php require('php/visitor_counter.php'); ?>
+    </strong>
+  </div> -->
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
