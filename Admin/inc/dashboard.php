@@ -88,7 +88,7 @@ $adminName = $_SESSION['admin_name'];
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="logout.php">
                         <span class="icon" data-bs-toggle="tooltip" data-bs-title="Logout"><i class="fas fa-sign-out"></i></span>
                         <span class="menu">Logout</span>
                     </a>
@@ -121,9 +121,8 @@ $adminName = $_SESSION['admin_name'];
 
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle py-1 px-3 rounded-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user-circle me-1"></i><i class="fas fa-user-circle me-1"></i>
+                                <i class="fas fa-user-circle me-1"></i>
                                 Welcome, <?php echo htmlspecialchars($adminName); ?> 👋
-
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#"><i class="fa-solid fa-address-card me-2"></i>Profile</a></li>
@@ -131,9 +130,10 @@ $adminName = $_SESSION['admin_name'];
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
+                                <li><a class="dropdown-item" href="logout.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
                             </ul>
                         </div>
+
                     </div>
                 </div>
             </nav>
@@ -273,6 +273,9 @@ $adminName = $_SESSION['admin_name'];
     <?php require('layout/deshboardlink.php'); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+      <!-- ✅ Bootstrap JS (must be placed at the bottom of body) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </body>
 
 </html>
