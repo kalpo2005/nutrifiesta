@@ -1,6 +1,10 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.bundle.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <script src="public/js/main.js"></script>
+    <script src="/js/main.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
     <script>
       const ctx = document.getElementById('myChart');
       const lc = document.getElementById('lineChart');

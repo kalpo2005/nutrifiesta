@@ -1,8 +1,8 @@
 <?php
 require('inc/db-config.php');
 
-$admin_name = "kalpo";
-$email = "kalpesh";
+$admin_name = "vanita";
+$email = "vanita@gamil.com";
 $password = "123123";
 
 $con = $GLOBALS['con'];

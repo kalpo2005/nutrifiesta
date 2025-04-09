@@ -11,7 +11,6 @@ if (!isset($_SESSION['adminLogin']) || $_SESSION['adminLogin'] !== true) {
 $adminName = $_SESSION['admin_name'];
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -232,27 +231,28 @@ $adminName = $_SESSION['admin_name'];
 
 
                         <!-- Chart Section -->
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 d-none">
                             <div class="card shadow">
                                 <div class="card-header">
                                     <h4 class="text-secondary fw-bold">Charts</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="row g-4">
-                                        <div class="col-lg-6">
-                                            <div class="card shadow-sm">
-                                                <div class="card-body">
-                                                    <canvas id="myChart"></canvas>
+                                        <div class="row g-4">
+                                            <div class="col-lg-6">
+                                                <div class="card shadow-sm">
+                                                    <div class="card-header bg-dark text-white">
+                                                        <h5 class="mb-0">Monthly Signups</h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <canvas id="barChart"></canvas>
+                                                    </div>
                                                 </div>
                                             </div>
+
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="card shadow-sm">
-                                                <div class="card-body">
-                                                    <canvas id="lineChart"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -273,8 +273,8 @@ $adminName = $_SESSION['admin_name'];
     <?php require('layout/deshboardlink.php'); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-      <!-- ✅ Bootstrap JS (must be placed at the bottom of body) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- ✅ Bootstrap JS (must be placed at the bottom of body) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </body>
 
