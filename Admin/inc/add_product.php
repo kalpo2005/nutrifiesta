@@ -16,13 +16,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 
 
-
-
-<?php if (isset($_GET['deleted'])): ?>
-    <script>
-        alert("✅ Product deleted successfully!");
-    </script>
-<?php endif; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +75,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
                 <div class="collapse <?php echo ($currentPage == 'child-one.php' || $currentPage == 'child-two.php') ? 'show' : ''; ?>" id="masterCollapse">
                     <li class="nav-item <?php echo ($currentPage == 'child-one.php') ? 'active' : ''; ?>">
-                    <a class="nav-link" href="Product.php">
+                        <a class="nav-link" href="Product.php">
                             <span class="icon" data-bs-toggle="tooltip" data-bs-title="Child One">
                                 <i class="fas fa-cube"></i>
                             </span>
@@ -172,7 +165,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <?php endif; ?>
 
 
-                <form method="POST" action="/php/add_product.php">
+                <form method="POST" action="/nutrifiesta/php/add_product.php">
 
                     <div class="row">
                         <div class="mb-3 col-md-6">
@@ -209,10 +202,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                         <a href="product.php" class="btn btn-secondary">Cancel</a>
                     </div>
                 </form>
+
             </div>
 
             <!-- Footer -->
-            <footer class="bg-light shadow text-secondary text-center d-flex flex-column flex-md-row justify-content-between p-3 p-md-4">
+            <footer class="bg-light b-0 shadow text-secondary text-center d-flex flex-column flex-md-row justify-content-between p-3 p-md-4">
                 <div>Copyright &copy; 2025 Vanita Solanki</div>
                 <div>Made with support</div>
             </footer>
@@ -220,11 +214,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     </div>
 
 
-    <!-- Footer -->
-    <footer class="bg-light shadow text-secondary text-center d-flex flex-column flex-md-row justify-content-between p-3 p-md-4">
-        <div>Copyright &copy; 2025 Vanita Solanki</div>
-        <div>Made with support</div>
-    </footer>
 
     <?php require('layout/deshboardlink.php'); ?>
 

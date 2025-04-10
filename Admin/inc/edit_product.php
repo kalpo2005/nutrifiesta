@@ -15,31 +15,7 @@ $adminName = $_SESSION['admin_name'];
 $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 
-<?php
 
-// Check if admin is logged in
-if (!isset($_SESSION['adminLogin']) || $_SESSION['adminLogin'] !== true) {
-    header("Location: ../index.php");
-    exit;
-}
-
-// ✅ JavaScript alert if session set
-if (isset($_SESSION['delete_success_js'])) {
-    echo "<script>alert('" . $_SESSION['delete_success_js'] . "');</script>";
-    unset($_SESSION['delete_success_js']); // So it doesn't show again on refresh
-}
-
-// Get admin name
-$adminName = $_SESSION['admin_name'];
-?>
-
-
-
-<?php if (isset($_GET['deleted'])): ?>
-    <script>
-        alert("✅ Product deleted successfully!");
-    </script>
-<?php endif; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -176,95 +152,93 @@ $adminName = $_SESSION['admin_name'];
             </nav>
 
             <!-- Main content -->
+
+            
             <?php require_once 'db-config.php'; ?>
 
-            <div class="container mt-5">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2>All Grocery Products</h2>
-                    <a href="add_product.php" class="btn btn-success">+ Add Product</a>
-                </div>
-<!-- add alert success  -->
-                <?php if (isset($_GET['status']) && $_GET['status'] === 'success'): ?>
-                    <script>
-                        alert("✅ Product added successfully!");
-                        if (window.history.replaceState) {
-                            const url = new URL(window.location.href);
-                            url.searchParams.delete('status');
-                            window.history.replaceState({}, document.title, url.pathname);
-                        }
-                    </script>
-                <?php endif; ?>
+            <?php
+            if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+                echo "<div class='alert alert-danger text-center'>Invalid Product ID.</div>";
+                exit;
+            }
+
+            $id = $_GET['id'];
+            $stmt = $con->prepare("SELECT * FROM products WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $product = $result->fetch_assoc();
+
+            if (!$product) {
+                echo "<div class='alert alert-warning text-center'>Product not found.</div>";
+                exit;
+            }
+            ?>
 
 
-                <!-- ✅ Success Alert using SESSION -->
-                <?php if (isset($_SESSION['delete_success'])): ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <?= $_SESSION['delete_success'] ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h3 class="mb-4 text-center">Edit Product</h3>
+
+                        <form method="POST" action="/nutrifiesta/php/update_product.php">
+
+                            <input type="hidden" name="id" value="<?= $product['id'] ?>">
+
+                            <div class="mb-3">
+                                <label class="form-label">Product Name</label>
+                                <input type="text" name="name" class="form-control" required value="<?= htmlspecialchars($product['name']) ?>">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Image URL</label>
+                                <input type="text" name="image" class="form-control" value="<?= htmlspecialchars($product['image']) ?>">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Price (₹)</label>
+                                <input type="number" step="0.01" name="price" class="form-control" required value="<?= $product['price'] ?>">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Feature 1</label>
+                                <input type="text" name="feature1" class="form-control" value="<?= htmlspecialchars($product['feature1']) ?>">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Feature 2</label>
+                                <input type="text" name="feature2" class="form-control" value="<?= htmlspecialchars($product['feature2']) ?>">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Feature 3</label>
+                                <input type="text" name="feature3" class="form-control" value="<?= htmlspecialchars($product['feature3']) ?>">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Rating</label>
+                                <input type="number" name="rating" min="1" max="5" class="form-control" value="<?= $product['rating'] ?>">
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">Update Product</button>
+                                <a href="/nutrifiesta/product.php" class="btn btn-secondary">Cancel</a>
+                            </div>
+
+                        </form>
                     </div>
-                    <?php unset($_SESSION['delete_success']); ?>
-                <?php endif; ?>
-
-                <table class="table table-bordered table-striped bg-white shadow">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Price (₹)</th>
-                            <th>Features</th>
-                            <th>Rating</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $result = $con->query("SELECT * FROM products ORDER BY product_id DESC");
-                        if ($result && $result->num_rows > 0):
-                            while ($row = $result->fetch_assoc()):
-                        ?>
-                                <tr>
-                                    <td><?= $row['product_id'] ?></td>
-                                    <td>
-                                        <img src="<?= htmlspecialchars($row['image']) ?>" class="product-img"
-                                            onerror="this.onerror=null;this.src='https://via.placeholder.com/60x40?text=No+Image';">
-                                    </td>
-                                    <td><?= htmlspecialchars($row['name']) ?></td>
-                                    <td>₹<?= number_format($row['price'], 2) ?></td>
-                                    <td>
-                                        <?= htmlspecialchars($row['feature1']) ?>,
-                                        <?= htmlspecialchars($row['feature2']) ?>,
-                                        <?= htmlspecialchars($row['feature3']) ?>
-                                    </td>
-                                    <td>
-                                        <?php for ($i = 0; $i < $row['rating']; $i++) echo '⭐'; ?>
-                                    </td>
-                                    <td>
-                                        <a href="edit_product.php?id=<?= $row['product_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                                        <a href="../../php/delete_product.php?id=<?= $row['product_id'] ?>" class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Are you sure you want to delete this product?');">
-                                            Delete
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php endwhile;
-                        else: ?>
-                            <tr>
-                                <td colspan="7" class="text-center">No products found.</td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
+                </div>
             </div>
 
-
             <!-- Footer -->
-            <footer class="bg-light shadow text-secondary text-center d-flex flex-column flex-md-row justify-content-between p-3 p-md-4">
+            <footer class="bg-light b-0 shadow text-secondary text-center d-flex flex-column flex-md-row justify-content-between p-3 p-md-4">
                 <div>Copyright &copy; 2025 Vanita Solanki</div>
                 <div>Made with support</div>
             </footer>
         </div>
     </div>
+
+
 
     <?php require('layout/deshboardlink.php'); ?>
 

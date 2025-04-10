@@ -177,13 +177,16 @@ $adminName = $_SESSION['admin_name'];
                                         <div class="text-center">
                                             <h2 class="display-4 fw-bold text-white">
                                                 <?php
-                                                $counterFile = $_SERVER['DOCUMENT_ROOT'] . '/nutrifiesta/php/counter.txt';
+                                                // Correct path to counter.txt relative to knd.php
+                                                $file = __DIR__ . '/../../php/counter.txt';
 
-                                                if (file_exists($counterFile)) {
-                                                    echo  file_get_contents($counterFile);
+                                                if (file_exists($file)) {
+                                                    $count = file_get_contents($file);
+                                                    echo " $count";
+                                                } else {
+                                                    echo "<p>Visitor count not found.</p>";
                                                 }
                                                 ?>
-
 
                                             </h2>
                                             <h4 class="text-white-50">Visitors</h4>
@@ -252,7 +255,7 @@ $adminName = $_SESSION['admin_name'];
 
                                         </div>
 
-                                    
+
                                     </div>
                                 </div>
                             </div>

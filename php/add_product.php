@@ -1,29 +1,32 @@
 <?php
-session_start();
-require_once '../Admin/inc/db-config.php'; // Capital "A" is correct if your folder is named "Admin"
+require_once '../Admin/inc/db-config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = trim($_POST['name']);
-    $image = trim($_POST['image']);
-    $price = (float) $_POST['price'];
-    $feature1 = trim($_POST['feature1']);
-    $feature2 = trim($_POST['feature2']);
-    $feature3 = trim($_POST['feature3']);
-    $rating = (int) $_POST['rating'];
+    $data = filteration($_POST);
 
-    $stmt = $con->prepare("INSERT INTO products (name, image, price, feature1, feature2, feature3, rating) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssdsssi", $name, $image, $price, $feature1, $feature2, $feature3, $rating);
+    $sql = "INSERT INTO products (name, price, image, feature1, feature2, feature3, rating) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $values = [
+        $data['name'],
+        $data['price'],
+        $data['image'],
+        $data['feature1'],
+        $data['feature2'],
+        $data['feature3'],
+        $data['rating']
+    ];
+    $datatypes = "sdssssi";
 
-    if ($stmt->execute()) {
-        $_SESSION['success_message'] = "Product added successfully!";
-        header("Location: ../Admin/inc/product.php"); // ✅ Redirects to your product page
-        exit();
+    $res = execute($sql, $values, $datatypes);
+
+    if ($res) {
+        // Use a URL parameter for now
+        header("Location: /nutrifiesta/Admin/inc/product.php?status=success");
+        exit;
     } else {
-        $_SESSION['error'] = "Failed to add product. Please try again.";
-        header("Location: ../Admin/inc/dashboard.php");
-        exit();
+        echo "❌ Failed to add product.";
     }
 } else {
-    header("Location: ../Admin/inc/product.php");
-    exit();
+    echo "⚠️ Invalid request.";
 }
+?>

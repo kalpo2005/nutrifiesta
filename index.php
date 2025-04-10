@@ -1,6 +1,8 @@
 <?php
-session_start();
++
+include 'php/visitor_counter.php';
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -123,79 +125,79 @@ session_start();
       </div>
     </div>
   </div>
-<!-- glocery section  -->
-<div class="container">
-  <h2 class="mt-2 pt-4 mb-4 fw-bold text-center fm-bold h-font">Our Grocery Product</h2>
-  <div class="row">
-    <?php
-    require(__DIR__ . '/admin/inc/db-config.php');
+  <!-- glocery section  -->
+  <div class="container">
+    <h2 class="mt-2 pt-4 mb-4 fw-bold text-center fm-bold h-font">Our Grocery Product</h2>
+    <div class="row">
+      <?php
+      require(__DIR__ . '/admin/inc/db-config.php');
 
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $limit = 6;
-    $offset = ($page - 1) * $limit;
+      $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+      $limit = 6;
+      $offset = ($page - 1) * $limit;
 
-    $total_result = $con->query("SELECT COUNT(*) AS total FROM products");
-    $total_row = $total_result->fetch_assoc();
-    $total_products = $total_row['total'];
-    $total_pages = ceil($total_products / $limit);
+      $total_result = $con->query("SELECT COUNT(*) AS total FROM products");
+      $total_row = $total_result->fetch_assoc();
+      $total_products = $total_row['total'];
+      $total_pages = ceil($total_products / $limit);
 
-    $sql = "SELECT * FROM products LIMIT $limit OFFSET $offset";
-    $result = $con->query($sql);
+      $sql = "SELECT * FROM products LIMIT $limit OFFSET $offset";
+      $result = $con->query($sql);
 
-    if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-        echo '<div class="col-lg-4 col-md-6 my-3">';
-        echo '<div class="card border-0 shadow" style="max-width: 350px; width: 100%; margin: auto;">';
-        echo '<img src="' . htmlspecialchars($row['image']) . '" class="card-img-top" style="height: 200px; object-fit: cover;">';
-        echo '<div class="card-body">';
-        echo '<h5>' . htmlspecialchars($row['name']) . '</h5>';
-        echo '<h6 class="mb-4">₹' . htmlspecialchars($row['price']) . ' per kg</h6>';
-        echo '<div class="feature mb-4">';
-        echo '<h6 class="mb-1">Features</h6>';
-        echo '<span class="badge bg-light text-dark text-wrap lh-base">' . htmlspecialchars($row['feature1']) . '</span> ';
-        echo '<span class="badge bg-light text-dark text-wrap lh-base">' . htmlspecialchars($row['feature2']) . '</span> ';
-        echo '<span class="badge bg-light text-dark text-wrap lh-base">' . htmlspecialchars($row['feature3']) . '</span>';
-        echo '</div>';
-        echo '<div class="rating mb-4">';
-        echo '<h6 class="mb-1">Rating</h6>';
-        echo '<span class="badge rounded-pill bg-light">';
-        for ($i = 0; $i < $row['rating']; $i++) {
-          echo '<i class="bi bi-star-fill text-warning"></i>';
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          echo '<div class="col-lg-4 col-md-6 my-3">';
+          echo '<div class="card border-0 shadow" style="max-width: 350px; width: 100%; margin: auto;">';
+          echo '<img src="' . htmlspecialchars($row['image']) . '" class="card-img-top" style="height: 200px; object-fit: cover;">';
+          echo '<div class="card-body">';
+          echo '<h5>' . htmlspecialchars($row['name']) . '</h5>';
+          echo '<h6 class="mb-4">₹' . htmlspecialchars($row['price']) . ' per kg</h6>';
+          echo '<div class="feature mb-4">';
+          echo '<h6 class="mb-1">Features</h6>';
+          echo '<span class="badge bg-light text-dark text-wrap lh-base">' . htmlspecialchars($row['feature1']) . '</span> ';
+          echo '<span class="badge bg-light text-dark text-wrap lh-base">' . htmlspecialchars($row['feature2']) . '</span> ';
+          echo '<span class="badge bg-light text-dark text-wrap lh-base">' . htmlspecialchars($row['feature3']) . '</span>';
+          echo '</div>';
+          echo '<div class="rating mb-4">';
+          echo '<h6 class="mb-1">Rating</h6>';
+          echo '<span class="badge rounded-pill bg-light">';
+          for ($i = 0; $i < $row['rating']; $i++) {
+            echo '<i class="bi bi-star-fill text-warning"></i>';
+          }
+          echo '</span>';
+          echo '</div>';
+          echo '<div class="d-flex justify-content-evenly mb-2">';
+          echo '<a href="#" class="btn btn-primary shadow-none">Order Now</a>';
+          echo '<a href="#" class="btn btn-outline-dark shadow-none">More Details</a>';
+          echo '</div>';
+          echo '</div>';
+          echo '</div>';
+          echo '</div>';
         }
-        echo '</span>';
-        echo '</div>';
-        echo '<div class="d-flex justify-content-evenly mb-2">';
-        echo '<a href="#" class="btn btn-primary shadow-none">Order Now</a>';
-        echo '<a href="#" class="btn btn-outline-dark shadow-none">More Details</a>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
+      } else {
+        echo '<div class="col-12 text-center"><p>No products found.</p></div>';
       }
-    } else {
-      echo '<div class="col-12 text-center"><p>No products found.</p></div>';
-    }
 
-    $con->close();
-    ?>
-  </div>
+      $con->close();
+      ?>
+    </div>
 
-  <!-- Pagination Links -->
-  <div class="d-flex justify-content-center mt-4">
-    <?php if ($page > 1): ?>
-      <a href="?page=<?php echo $page - 1; ?>" class="btn btn-outline-dark mx-1">Prev</a>
-    <?php endif; ?>
-    <?php
-    for ($i = 1; $i <= $total_pages; $i++) {
-      $active = ($i == $page) ? 'active' : '';
-      echo '<a href="?page=' . $i . '" class="btn btn-outline-dark mx-1 ' . $active . '">' . $i . '</a>';
-    }
-    ?>
-    <?php if ($page < $total_pages): ?>
-      <a href="?page=<?php echo $page + 1; ?>" class="btn btn-outline-dark mx-1">Next</a>
-    <?php endif; ?>
+    <!-- Pagination Links -->
+    <div class="d-flex justify-content-center mt-4">
+      <?php if ($page > 1): ?>
+        <a href="?page=<?php echo $page - 1; ?>" class="btn btn-outline-dark mx-1">Prev</a>
+      <?php endif; ?>
+      <?php
+      for ($i = 1; $i <= $total_pages; $i++) {
+        $active = ($i == $page) ? 'active' : '';
+        echo '<a href="?page=' . $i . '" class="btn btn-outline-dark mx-1 ' . $active . '">' . $i . '</a>';
+      }
+      ?>
+      <?php if ($page < $total_pages): ?>
+        <a href="?page=<?php echo $page + 1; ?>" class="btn btn-outline-dark mx-1">Next</a>
+      <?php endif; ?>
+    </div>
   </div>
-</div>
 
 
 
