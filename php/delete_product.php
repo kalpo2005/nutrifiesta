@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/../admin/inc/db-config.php';
 
 if (isset($_GET['id'])) {
@@ -9,7 +10,8 @@ if (isset($_GET['id'])) {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-        header("Location: ../admin/inc/product.php?deleted=1");
+        $_SESSION['delete_success_js'] = "Product deleted successfully!";
+        header("Location: ../admin/inc/product.php");
         exit();
     } else {
         echo "Product not found or could not be deleted.";

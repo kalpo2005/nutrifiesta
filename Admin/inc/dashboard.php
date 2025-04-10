@@ -62,11 +62,11 @@ $adminName = $_SESSION['admin_name'];
 
                 <div class="collapse" id="masterCollapse">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="Product.php">
                             <span class="icon" data-bs-toggle="tooltip" data-bs-title="Child One">
                                 <i class="fas fa-cube"></i>
                             </span>
-                            <span class="menu">Child One</span>
+                            <span class="menu">Product</span>
                         </a>
                     </li>
                     <li class="nav-item">

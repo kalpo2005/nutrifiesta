@@ -33,72 +33,72 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
         <!-- Sidebar start -->
         <div class="sidebar shadow">
-    <div class="admin_brand d-flex justify-content-between align-items-baseline">
-        <div>
-            <a class="nav-link fw-bold" href="#">
-                <span class="icon"><i class="fas fa-code"></i></span>
-                <span class="menu">Admin Dashboard</span>
-            </a>
+            <div class="admin_brand d-flex justify-content-between align-items-baseline">
+                <div>
+                    <a class="nav-link fw-bold" href="#">
+                        <span class="icon"><i class="fas fa-code"></i></span>
+                        <span class="menu">Admin Dashboard</span>
+                    </a>
+                </div>
+                <div class="d-block d-md-none">
+                    <a href="javascript:void(0)" id="close_sidebar"><i class="fas fa-times-circle fa-lg"></i></a>
+                </div>
+            </div>
+
+            <ul class="nav nav-pills flex-column">
+
+                <li class="nav-item <?php echo ($currentPage == 'dashboard.php') ? 'active' : ''; ?>">
+                    <a class="nav-link" href="dashboard.php">
+                        <span class="icon" data-bs-toggle="tooltip" data-bs-title="Dashboard"><i class="fas fa-dashboard"></i></span>
+                        <span class="menu">Dashboard</span>
+                    </a>
+                </li>
+
+                <!-- Dropdown menu -->
+                <li class="nav-item position-relative <?php echo ($currentPage == 'child-one.php' || $currentPage == 'child-two.php') ? 'active' : ''; ?>" data-bs-toggle="collapse" href="#masterCollapse" role="button" aria-expanded="false" aria-controls="masterCollapse">
+                    <a class="nav-link" href="#">
+                        <span class="icon" data-bs-toggle="tooltip" data-bs-title="Master">
+                            <i class="fas fa-cubes"></i>
+                        </span>
+                        <span class="menu">Master</span>
+                    </a>
+                </li>
+
+                <div class="collapse <?php echo ($currentPage == 'child-one.php' || $currentPage == 'child-two.php') ? 'show' : ''; ?>" id="masterCollapse">
+                    <li class="nav-item <?php echo ($currentPage == 'child-one.php') ? 'active' : ''; ?>">
+                        <a class="nav-link" href="Product">
+                            <span class="icon" data-bs-toggle="tooltip" data-bs-title="Child One">
+                                <i class="fas fa-cube"></i>
+                            </span>
+                            <span class="menu">Product</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?php echo ($currentPage == 'child-two.php') ? 'active' : ''; ?>">
+                        <a class="nav-link" href="child-two.php">
+                            <span class="icon" data-bs-toggle="tooltip" data-bs-title="Child Two">
+                                <i class="fas fa-cube"></i>
+                            </span>
+                            <span class="menu">Child Two</span>
+                        </a>
+                    </li>
+                </div>
+
+                <li class="nav-item <?php echo ($currentPage == 'user.php') ? 'active' : ''; ?>">
+                    <a class="nav-link" href="user.php">
+                        <span class="icon" data-bs-toggle="tooltip" data-bs-title="Users"><i class="fas fa-users"></i></span>
+                        <span class="menu">Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item <?php echo ($currentPage == 'logout.php') ? 'active' : ''; ?>">
+                    <a class="nav-link" href="logout.php">
+                        <span class="icon" data-bs-toggle="tooltip" data-bs-title="Logout"><i class="fas fa-sign-out"></i></span>
+                        <span class="menu">Logout</span>
+                    </a>
+                </li>
+
+            </ul>
         </div>
-        <div class="d-block d-md-none">
-            <a href="javascript:void(0)" id="close_sidebar"><i class="fas fa-times-circle fa-lg"></i></a>
-        </div>
-    </div>
-
-    <ul class="nav nav-pills flex-column">
-
-        <li class="nav-item <?php echo ($currentPage == 'dashboard.php') ? 'active' : ''; ?>">
-            <a class="nav-link" href="dashboard.php">
-                <span class="icon" data-bs-toggle="tooltip" data-bs-title="Dashboard"><i class="fas fa-dashboard"></i></span>
-                <span class="menu">Dashboard</span>
-            </a>
-        </li>
-
-        <!-- Dropdown menu -->
-        <li class="nav-item position-relative <?php echo ($currentPage == 'child-one.php' || $currentPage == 'child-two.php') ? 'active' : ''; ?>" data-bs-toggle="collapse" href="#masterCollapse" role="button" aria-expanded="false" aria-controls="masterCollapse">
-            <a class="nav-link" href="#">
-                <span class="icon" data-bs-toggle="tooltip" data-bs-title="Master">
-                    <i class="fas fa-cubes"></i>
-                </span>
-                <span class="menu">Master</span>
-            </a>
-        </li>
-
-        <div class="collapse <?php echo ($currentPage == 'child-one.php' || $currentPage == 'child-two.php') ? 'show' : ''; ?>" id="masterCollapse">
-            <li class="nav-item <?php echo ($currentPage == 'child-one.php') ? 'active' : ''; ?>">
-                <a class="nav-link" href="child-one.php">
-                    <span class="icon" data-bs-toggle="tooltip" data-bs-title="Child One">
-                        <i class="fas fa-cube"></i>
-                    </span>
-                    <span class="menu">Child One</span>
-                </a>
-            </li>
-            <li class="nav-item <?php echo ($currentPage == 'child-two.php') ? 'active' : ''; ?>">
-                <a class="nav-link" href="child-two.php">
-                    <span class="icon" data-bs-toggle="tooltip" data-bs-title="Child Two">
-                        <i class="fas fa-cube"></i>
-                    </span>
-                    <span class="menu">Child Two</span>
-                </a>
-            </li>
-        </div>
-
-        <li class="nav-item <?php echo ($currentPage == 'user.php') ? 'active' : ''; ?>">
-            <a class="nav-link" href="user.php">
-                <span class="icon" data-bs-toggle="tooltip" data-bs-title="Users"><i class="fas fa-users"></i></span>
-                <span class="menu">Users</span>
-            </a>
-        </li>
-
-        <li class="nav-item <?php echo ($currentPage == 'logout.php') ? 'active' : ''; ?>">
-            <a class="nav-link" href="logout.php">
-                <span class="icon" data-bs-toggle="tooltip" data-bs-title="Logout"><i class="fas fa-sign-out"></i></span>
-                <span class="menu">Logout</span>
-            </a>
-        </li>
-
-    </ul>
-</div>
 
         <!-- Sidebar end -->
 
@@ -158,7 +158,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                                         <th>#</th>
                                         <th>User Name</th>
                                         <th>Email</th>
-                                        <th>Phone</th>  
+                                        <th>Phone</th>
                                         <th>user Id</th>
                                         <th>Action</th>
                                     </tr>
@@ -187,7 +187,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                                             </tr>";
                                             $i++;
                                         }
-                                        
                                     } else {
                                         echo "<tr><td colspan='6' class='text-center'>No users found</td></tr>";
                                     }
