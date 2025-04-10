@@ -95,6 +95,201 @@ session_start();
 
 
 
+
+
+  <div class="containerfluid px-lg-4 mt-4">
+    <div class="swiper swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="images/bg-img/p2.jpg" class="w-100 b-block" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images/bg-img/5.jpg" class="w-100 h-90 b-block" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images/bg-img/p2.jpg" class="w-100 b-block" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images/bg-img/5.jpg" class="w-100 b-block" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 bg-white shadow p-3 rounded">
+        <h5>Order Fresh Fruit's and Vagetable</h5>
+      </div>
+    </div>
+  </div>
+<!-- glocery section  -->
+<div class="container">
+  <h2 class="mt-2 pt-4 mb-4 fw-bold text-center fm-bold h-font">Our Grocery Product</h2>
+  <div class="row">
+    <?php
+    require(__DIR__ . '/admin/inc/db-config.php');
+
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $limit = 6;
+    $offset = ($page - 1) * $limit;
+
+    $total_result = $con->query("SELECT COUNT(*) AS total FROM products");
+    $total_row = $total_result->fetch_assoc();
+    $total_products = $total_row['total'];
+    $total_pages = ceil($total_products / $limit);
+
+    $sql = "SELECT * FROM products LIMIT $limit OFFSET $offset";
+    $result = $con->query($sql);
+
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        echo '<div class="col-lg-4 col-md-6 my-3">';
+        echo '<div class="card border-0 shadow" style="max-width: 350px; width: 100%; margin: auto;">';
+        echo '<img src="' . htmlspecialchars($row['image']) . '" class="card-img-top" style="height: 200px; object-fit: cover;">';
+        echo '<div class="card-body">';
+        echo '<h5>' . htmlspecialchars($row['name']) . '</h5>';
+        echo '<h6 class="mb-4">₹' . htmlspecialchars($row['price']) . ' per kg</h6>';
+        echo '<div class="feature mb-4">';
+        echo '<h6 class="mb-1">Features</h6>';
+        echo '<span class="badge bg-light text-dark text-wrap lh-base">' . htmlspecialchars($row['feature1']) . '</span> ';
+        echo '<span class="badge bg-light text-dark text-wrap lh-base">' . htmlspecialchars($row['feature2']) . '</span> ';
+        echo '<span class="badge bg-light text-dark text-wrap lh-base">' . htmlspecialchars($row['feature3']) . '</span>';
+        echo '</div>';
+        echo '<div class="rating mb-4">';
+        echo '<h6 class="mb-1">Rating</h6>';
+        echo '<span class="badge rounded-pill bg-light">';
+        for ($i = 0; $i < $row['rating']; $i++) {
+          echo '<i class="bi bi-star-fill text-warning"></i>';
+        }
+        echo '</span>';
+        echo '</div>';
+        echo '<div class="d-flex justify-content-evenly mb-2">';
+        echo '<a href="#" class="btn btn-primary shadow-none">Order Now</a>';
+        echo '<a href="#" class="btn btn-outline-dark shadow-none">More Details</a>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+      }
+    } else {
+      echo '<div class="col-12 text-center"><p>No products found.</p></div>';
+    }
+
+    $con->close();
+    ?>
+  </div>
+
+  <!-- Pagination Links -->
+  <div class="d-flex justify-content-center mt-4">
+    <?php if ($page > 1): ?>
+      <a href="?page=<?php echo $page - 1; ?>" class="btn btn-outline-dark mx-1">Prev</a>
+    <?php endif; ?>
+    <?php
+    for ($i = 1; $i <= $total_pages; $i++) {
+      $active = ($i == $page) ? 'active' : '';
+      echo '<a href="?page=' . $i . '" class="btn btn-outline-dark mx-1 ' . $active . '">' . $i . '</a>';
+    }
+    ?>
+    <?php if ($page < $total_pages): ?>
+      <a href="?page=<?php echo $page + 1; ?>" class="btn btn-outline-dark mx-1">Next</a>
+    <?php endif; ?>
+  </div>
+</div>
+
+
+
+  <h2 class="mt-5 pt-4 fw-bold mb-4 text-center fm-bold h-font">Reach Us</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col lg-8 col-md-8 p-4 mb-lg-0 mb-3 bg-white rounded">
+        <iframe class="w-100 rounded" height="320px" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31047.69556995658!2d72.11686662361357!3d21.75534370046627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f5a7323e981b5%3A0xa5182291c8c086b3!2sSardar%20Nagar%2C%20Bhavnagar%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1741516825914!5m2!1sen!2sin"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="col-lg-4 col-md-4">
+        <div class="bg-white p-4 rounded mb-4">
+          <h5>Call Us</h5>
+          <a href="tel: +919016835668 "
+            class="d-inline-block mb-3 text-decoration-none text-dark">
+            <i class="bi bi-telephone-fill"></i> +919016835668
+          </a>
+          <br>
+          <a href="tel: +919016835668 "
+            class="d-inline-block text-decoration-none text-dark">
+            <i class="bi bi-telephone-fill"></i> +919016835668
+          </a>
+        </div>
+        <div class="bg-white p-4 rounded mb-4">
+          <h5>Follow Us</h5>
+          <a href="#" class="d-inline-block mb-3">
+            <span class="badge bg-light text-dark fs-6 p-2">
+              <i class="bi bi-twitter me-1"></i>Twitter
+            </span>
+          </a>
+          <br>
+          <a href="#" class="d-inline-block mb-3">
+            <span class="badge bg-light text-dark fs-6 p-2">
+              <i class="bi bi-facebook me-1"></i>Facebook
+            </span>
+          </a>
+          <br>
+          <a href="#" class="d-inline-block">
+            <span class="badge bg-light text-dark fs-6 p-1">
+              <i class="bi bi-instagram me-1"></i>Instagram
+            </span>
+          </a>
+          <br>
+          <a href="tel: +919016835668 "
+            class="d-inline-block text-decoration-none text-dark">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <footer>
+    <div class="container fluid bg-white mt-5">
+      <div class="row">
+        <div class="col-lg-4 p-4">
+          <h3 class="h-font fw-bold fs-3 mb-2">Grocery NutriFiesta</h3>
+          <p>
+            "Welcome to NutriFiesta Fruit's and Vagetable! website"
+            We are company dedicated to providing the fresh and tasties fruit's and vegetable to our customers.
+          </p>
+        </div>
+        <div class="col-lg-4 p-4">
+          <h5 class="mb-3">Links</h5>
+          <a href="#" class="d-inline-block mb-2 text-dark text-decoration-none">Home</a><br>
+          <a href="Cart.php" class="d-inline-block mb-2 text-dark text-decoration-none">Cart</a><br>
+          <a href="index.php" class="d-inline-block mb-2 text-dark text-decoration-none">Product</a><br>
+          <a href="About.php" class="d-inline-block mb-2 text-dark text-decoration-none">About Us</a><br>
+          <a href="Contact.php" class="d-inline-block mb-2 text-dark text-decoration-none">Contact Us</a>
+          <a href="Feedback.php" class="d-inline-block mb-2 text-dark text-decoration-none">Feedback</a>
+        </div>
+        <div class="col-lg-4 p-4">
+          <h5 class="mb-3">Follow Us</h5>
+          <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
+            <i class="bi bi-twitter me-1"></i>Twitter
+          </a><br>
+          <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
+            <i class="bi bi-facebook me-1"></i>Facebook
+          </a><br>
+          <a href="#" class="d-inline-block text-dark text-decoration-none">
+            <i class="bi bi-instagram me-1"></i>Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+    <h6 class="text-center bg-dark text-white p-3 m-0">Designed and Developed by NutriFiesta Grocery Web </h6>
+
+  </footer>
+
+
+  <!-- all model are  here -->
+
+
+
   <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -196,438 +391,6 @@ session_start();
       </div>
     </div>
   </div>
-
-
-
-  <div class="containerfluid px-lg-4 mt-4">
-    <div class="swiper swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="images/bg-img/p2.jpg" class="w-100 b-block" />
-        </div>
-        <div class="swiper-slide">
-          <img src="images/bg-img/5.jpg" class="w-100 h-90 b-block" />
-        </div>
-        <div class="swiper-slide">
-          <img src="images/bg-img/p2.jpg" class="w-100 b-block" />
-        </div>
-        <div class="swiper-slide">
-          <img src="images/bg-img/5.jpg" class="w-100 b-block" />
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 bg-white shadow p-3 rounded">
-        <h5>Order Fresh Fruit's and Vagetable</h5>
-      </div>
-    </div>
-  </div>
-  <h2 class="mt-2 pt-4 mb-4  fw-bold text-center fm-bold h-font">Our Grocery Product</h2>
-  <div class="container">
-    <div class="row">
-      <div class="col lg-4 col-md-4 my-3">
-        <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-          <img src="images/fruit's/strawberry.jpg" class="card-img-top">
-          <div class="card-body">
-            <h5>Straw Berry</h5>
-            <h6 class="mb-4">₹100.00 per kg</h6>
-            <div class="feature mb-4">
-              <h6 class="mb-1">Features</h6>
-              <span class="badge bg-light text-dark  text-wrap lh-base">
-                Fresh Straw Berry
-              </span>
-              <span class="badge bg-light text-dark text-wrap lh-base">
-                stock Available
-              </span>
-              <span class="badge bg-light text-dark  text-wrap lh-base">
-                Your Favourite
-              </span>
-            </div>
-            <div class="rating mb-4">
-              <h6 class="mb-1">Rating</h6>
-              <span class="bage rounded-pill bg-light">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-              </span>
-            </div>
-            <div class="d-flex justify-content-evenly mb-2">
-              <a href="#" class="btn btn-primary shadow-none">Order Now</a>
-              <a href="#" class="btn btn-primary btn-outline-bark shadow-none">More Details</a>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col lg-4 col-md-4 my-3">
-        <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-          <img src="images/fruit's/black grapes.jpg" class="card-img-top">
-          <div class="card-body mb-4">
-            <h5>Dark Grapes</h5>
-            <h6 class="mb-3">₹115.00 per kg</h6>
-            <div class="feature mb-3">
-              <h6 class="mb-1">Features</h6>
-              <span class="badge bg-light text-dark  text-wrap lh-base mb-2">
-                Fresh Grapes
-              </span>
-              <span class="badge bg-light text-dark text-wrap lh-base mb-2">
-                stock Available
-              </span>
-              <span class="badge bg-light text-dark  text-wrap lh-base mb-2">
-                Healthy for Health
-              </span>
-            </div>
-            <div class="rating mb-4">
-              <h6 class="mb-1">Rating</h6>
-              <span class="bage rounded-pill bg-light">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-              </span>
-            </div>
-            <div class="d-flex justify-content-evenly mb-2">
-              <a href="#" class="btn btn-primary shadow-none">Order Now</a>
-              <a href="#" class="btn btn-primary btn-outline-bark shadow-none">More Details</a>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col lg-4 col-md-4 my-3">
-        <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-          <img src="images/fruit's/apple.jpg" class="card-img-top">
-          <div class="card-body">
-            <h5>Apple</h5>
-            <h6 class="mb-4">₹150.00 per kg</h6>
-            <div class="feature mb-4">
-              <h6 class="mb-2">Features</h6>
-              <span class="badge bg-light text-dark  text-wrap lh-base mb-4">
-                Fresh Apple
-              </span>
-              <span class="badge bg-light text-dark text-wrap lh-base mb-4">
-                stock Available
-              </span>
-              <span class="badge bg-light text-dark  text-wrap lh-base mb-4">
-                Good for Health
-              </span>
-            </div>
-            <div class="rating mb-4">
-              <h6 class="mb-1">Rating</h6>
-              <span class="bage rounded-pill bg-light">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-              </span>
-            </div>
-            <div class="d-flex justify-content-evenly mb-2">
-              <a href="#" class="btn btn-primary shadow-none">Order Now</a>
-              <a href="#" class="btn btn-primary btn-outline-bark shadow-none">More Details</a>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col lg-4 col-md-4 my-3">
-        <div class="card border-0 shadow" style="max-width: 500px; margin: auto;">
-          <img src="images/vegetable/Lady Finge.jpg" class="card-img-top">
-          <div class="card-body">
-            <h5>Lady Finger</h5>
-            <h6 class="mb-4">₹120.00 per kg</h6>
-            <div class="feature mb-4">
-              <h6 class="mb-1">Features</h6>
-              <span class="badge bg-light text-dark  text-wrap lh-base">
-                Fresh Straw Berry
-              </span>
-              <span class="badge bg-light text-dark text-wrap lh-base">
-                stock Available
-              </span>
-              <span class="badge bg-light text-dark  text-wrap lh-base">
-                Grown Organically
-              </span>
-            </div>
-            <div class="rating mb-4">
-              <h6 class="mb-1">Rating</h6>
-              <span class="bage rounded-pill bg-light">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-              </span>
-            </div>
-            <div class="d-flex justify-content-evenly mb-2">
-              <a href="#" class="btn btn-primary shadow-none">Order Now</a>
-              <a href="#" class="btn btn-primary btn-outline-bark shadow-none">More Details</a>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col lg-4 col-md-4 my-3">
-        <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-          <img src="images/vegetable/Potato.jpg" class="card-img-top">
-          <div class="card-body">
-            <h5>Potato</h5>
-            <h6 class="mb-3">₹60.00 per kg</h6>
-            <div class="feature mb-4">
-              <h6 class="mb-1">Features</h6>
-              <span class="badge bg-light text-dark  text-wrap lh-base">
-                Fresh Straw Berry
-              </span>
-              <span class="badge bg-light text-dark text-wrap lh-base">
-                stock Available
-              </span>
-              <span class="badge bg-light text-dark  text-wrap lh-base">
-                Grown Organically
-              </span>
-            </div>
-            <div class="rating mb-4">
-              <h6 class="mb-1">Rating</h6>
-              <span class="bage rounded-pill bg-light">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-              </span>
-            </div>
-            <div class="d-flex justify-content-evenly mb-2">
-              <a href="#" class="btn btn-primary shadow-none">Order Now</a>
-              <a href="#" class="btn btn-primary btn-outline-bark shadow-none">More Details</a>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col lg-4 col-md-4 my-3">
-        <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-          <img src="images/vegetable/Brinjal.jpg" class="card-img-top">
-          <div class="card-body">
-            <h5>Brinjal</h5>
-            <h6 class="mb-3">₹120.00 per kg</h6>
-            <div class="feature mb-4">
-              <h6 class="mb-1">Features</h6>
-              <span class="badge bg-light text-dark  text-wrap lh-base">
-                Fresh Straw Berry
-              </span>
-              <span class="badge bg-light text-dark text-wrap lh-base">
-                stock Available
-              </span>
-              <span class="badge bg-light text-dark  text-wrap lh-base">
-                Grown Organically
-              </span>
-            </div>
-            <div class="rating mb-4">
-              <h6 class="mb-1">Rating</h6>
-              <span class="bage rounded-pill bg-light">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-              </span>
-            </div>
-            <div class="d-flex justify-content-evenly mb-2">
-              <a href="#" class="btn btn-primary shadow-none">Order Now</a>
-              <a href="#" class="btn btn-primary btn-outline-bark shadow-none">More Details</a>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="col-lg-12 text-center mt-5">
-        <a href="g" class="btn btn-sm btn-outline-dark rounded-0 fm-bold shadow-none">More Grocery >>></a>
-      </div>
-
-    </div>
-  </div>
-
-
-  <h2 class="mt-5 pt-4  fw-bold mb-4 text-center fw-bold h-font ">Testimonials</h2>
-  <div class="container">
-    <div class="swiper Swiper-testimonials">
-      <div class="swiper-wrapper">
-
-        <div class="swiper-slide bg-white p-4">
-          <div class="profile d-flex align-item-center mb-1">
-            <img src="images/bg-img/rating.png" width="35px">
-            <h6 class="m-0 ms-2">Random User1</h6>
-          </div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Corporis alias repudiandae odio reiciendis quos
-            atque eius qui non sunt fuga.
-          </p>
-          <div class="rating">
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-          </div>
-        </div>
-        <div class="swiper-slide bg-white p-4">
-          <div class="profile d-flex align-item-center mb-3">
-            <img src="images/bg-img/rating.png" width="35px">
-            <h6 class="m-0 ms-2">Random User4</h6>
-          </div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Corporis alias repudiandae odio reiciendis quos
-            atque eius qui non sunt fuga.
-          </p>
-          <div class="rating">
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-          </div>
-        </div>
-        <div class="swiper-slide bg-white p-4">
-          <div class="profile d-flex align-item-center mb-3">
-            <img src="images/bg-img/rating.png" width="35px">
-            <h6 class="m-0 ms-2">Random User3</h6>
-          </div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Corporis alias repudiandae odio reiciendis quos
-            atque eius qui non sunt fuga.
-          </p>
-          <div class="rating">
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-          </div>
-        </div>
-        <div class="swiper-slide bg-white p-4">
-          <div class="profile d-flex align-item-center mb-3">
-            <img src="images/bg-img/rating.png" width="35px">
-            <h6 class="m-0 ms-2">Random User2</h6>
-          </div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Corporis alias repudiandae odio reiciendis quos
-            atque eius qui non sunt fuga.
-          </p>
-          <div class="rating">
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-          </div>
-        </div>
-
-
-
-      </div>
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
-
-
-  <h2 class="mt-5 pt-4 fw-bold mb-4 text-center fm-bold h-font">Reach Us</h2>
-  <div class="container">
-    <div class="row">
-      <div class="col lg-8 col-md-8 p-4 mb-lg-0 mb-3 bg-white rounded">
-        <iframe class="w-100 rounded" height="320px" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31047.69556995658!2d72.11686662361357!3d21.75534370046627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f5a7323e981b5%3A0xa5182291c8c086b3!2sSardar%20Nagar%2C%20Bhavnagar%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1741516825914!5m2!1sen!2sin"
-          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-      <div class="col-lg-4 col-md-4">
-        <div class="bg-white p-4 rounded mb-4">
-          <h5>Call Us</h5>
-          <a href="tel: +919016835668 "
-            class="d-inline-block mb-3 text-decoration-none text-dark">
-            <i class="bi bi-telephone-fill"></i> +919016835668
-          </a>
-          <br>
-          <a href="tel: +919016835668 "
-            class="d-inline-block text-decoration-none text-dark">
-            <i class="bi bi-telephone-fill"></i> +919016835668
-          </a>
-        </div>
-        <div class="bg-white p-4 rounded mb-4">
-          <h5>Follow Us</h5>
-          <a href="#" class="d-inline-block mb-3">
-            <span class="badge bg-light text-dark fs-6 p-2">
-              <i class="bi bi-twitter me-1"></i>Twitter
-            </span>
-          </a>
-          <br>
-          <a href="#" class="d-inline-block mb-3">
-            <span class="badge bg-light text-dark fs-6 p-2">
-              <i class="bi bi-facebook me-1"></i>Facebook
-            </span>
-          </a>
-          <br>
-          <a href="#" class="d-inline-block">
-            <span class="badge bg-light text-dark fs-6 p-1">
-              <i class="bi bi-instagram me-1"></i>Instagram
-            </span>
-          </a>
-          <br>
-          <a href="tel: +919016835668 "
-            class="d-inline-block text-decoration-none text-dark">
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container fluid bg-white mt-5">
-    <div class="row">
-      <div class="col-lg-4 p-4">
-        <h3 class="h-font fw-bold fs-3 mb-2">Grocery NutriFiesta</h3>
-        <p>
-          "Welcome to NutriFiesta Fruit's and Vagetable! website"
-          We are company dedicated to providing the fresh and tasties fruit's and vegetable to our customers.
-        </p>
-      </div>
-      <div class="col-lg-4 p-4">
-        <h5 class="mb-3">Links</h5>
-        <a href="#" class="d-inline-block mb-2 text-dark text-decoration-none">Home</a><br>
-        <a href="Cart.php" class="d-inline-block mb-2 text-dark text-decoration-none">Cart</a><br>
-        <a href="index.php" class="d-inline-block mb-2 text-dark text-decoration-none">Product</a><br>
-        <a href="About.php" class="d-inline-block mb-2 text-dark text-decoration-none">About Us</a><br>
-        <a href="Contact.php" class="d-inline-block mb-2 text-dark text-decoration-none">Contact Us</a>
-        <a href="Feedback.php" class="d-inline-block mb-2 text-dark text-decoration-none">Feedback</a>
-      </div>
-      <div class="col-lg-4 p-4">
-        <h5 class="mb-3">Follow Us</h5>
-        <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
-          <i class="bi bi-twitter me-1"></i>Twitter
-        </a><br>
-        <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
-          <i class="bi bi-facebook me-1"></i>Facebook
-        </a><br>
-        <a href="#" class="d-inline-block text-dark text-decoration-none">
-          <i class="bi bi-instagram me-1"></i>Instagram
-        </a>
-      </div>
-    </div>
-  </div>
-  <h6 class="text-center bg-dark text-white p-3 m-0">Designed and Developed by NutriFiesta Grocery Web </h6>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
