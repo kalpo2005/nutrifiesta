@@ -209,7 +209,6 @@ $adminName = $_SESSION['admin_name'];
                     <thead class="table-dark">
                         <tr>
                             <th>ID</th>
-                            <th>Image</th>
                             <th>Name</th>
                             <th>Price (₹)</th>
                             <th>Features</th>
@@ -225,10 +224,7 @@ $adminName = $_SESSION['admin_name'];
                         ?>
                                 <tr>
                                     <td><?= $row['product_id'] ?></td>
-                                    <td>
-                                        <img src="<?= htmlspecialchars($row['image']) ?>" class="product-img"
-                                            onerror="this.onerror=null;this.src='https://via.placeholder.com/60x40?text=No+Image';">
-                                    </td>
+                                   
                                     <td><?= htmlspecialchars($row['name']) ?></td>
                                     <td>₹<?= number_format($row['price'], 2) ?></td>
                                     <td>

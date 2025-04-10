@@ -196,6 +196,36 @@ $adminName = $_SESSION['admin_name'];
                             </a>
                         </div>
 
+
+                        <!-- Static Data -->
+                        <div class="col-lg-3 col-md-6">
+                            <a href="#" class="text-decoration-none">
+                                <div class="card bg-success shadow-sm custom-card">
+                                    <div class="card-body p-3 pb-2 px-3 d-flex flex-row justify-content-between align-items-center">
+                                        <div>
+                                            <h1><i class="fas fa-list fa-2x text-white-50"></i></h1>
+                                        </div>
+                                        <div class="text-center">
+                                            <h2 class="display-4 fw-bold text-white">
+                                                <?php
+                                                require_once 'db-config.php';
+
+                                                $count_result = $con->query("SELECT COUNT(*) AS total_products FROM products");
+                                                $count_row = $count_result->fetch_assoc();
+                                                $total_products = $count_row['total_products'];
+                                                ?>
+
+                                                <!-- Display product count -->
+                                             <?= $total_products ?>
+
+                                            </h2>
+                                            <h4 class="text-white-50">Products</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
                         <!-- Order Count -->
                         <div class="col-lg-3 col-md-6">
                             <a href="#" class="text-decoration-none">
@@ -215,22 +245,6 @@ $adminName = $_SESSION['admin_name'];
                             </a>
                         </div>
 
-                        <!-- Static Data -->
-                        <div class="col-lg-3 col-md-6">
-                            <a href="#" class="text-decoration-none">
-                                <div class="card bg-success shadow-sm custom-card">
-                                    <div class="card-body p-3 pb-2 px-3 d-flex flex-row justify-content-between align-items-center">
-                                        <div>
-                                            <h1><i class="fas fa-list fa-2x text-white-50"></i></h1>
-                                        </div>
-                                        <div class="text-center">
-                                            <h2 class="display-4 fw-bold text-white">4</h2>
-                                            <h4 class="text-white-50">Products</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
 
 
                         <!-- Chart Section -->

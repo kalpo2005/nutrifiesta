@@ -165,16 +165,15 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <?php endif; ?>
 
 
-                <form method="POST" action="/nutrifiesta/php/add_product.php">
-
+                <form method="POST" action="/nutrifiesta/php/add_product.php" enctype="multipart/form-data">
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Product Name</label>
                             <input type="text" name="name" required class="form-control">
                         </div>
                         <div class="mb-3 col-md-6">
-                            <label class="form-label">Image URL</label>
-                            <input type="text" name="image" class="form-control">
+                            <label class="form-label">Image Upload</label>
+                            <input type="file" name="image" class="form-control" accept="image/*" required>
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Price (₹)</label>
@@ -202,6 +201,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                         <a href="product.php" class="btn btn-secondary">Cancel</a>
                     </div>
                 </form>
+
 
             </div>
 
